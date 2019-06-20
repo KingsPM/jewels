@@ -11,7 +11,7 @@ import argparse
 if '-h' in sys.argv[1]:
  parser = argparse.ArgumentParser(
   description='Creates new sqvd studies and add corresponding vcf files from batch of vcf files in cuurent directory. Requires pysqvd to be installed in python environment')
- parser.add_argument('required input:', help='batch_pysqvd.py --usename --password')
+ parser.add_argument('required input:', help='batch_pysqvd.py <username> <password> <IP_address> <panel> <panel_version>')
  #args = parser.parse_args()
  parser.print_help()
 else:
@@ -41,16 +41,17 @@ else:
  print(hold_base_name)
 
 ###open connection to sqvd (currently local)###
- sqvd = SQVD(username=sys.argv[1], password=sys.argv[2], host='127.0.0.1:3000')
-
+ sqvd = SQVD(username=sys.argv[1], password=sys.argv[2], host=sys.argv[3])
+ panel = sys.argv[4]
+ panel_V = sys.argv[5]
 ####### define pysqvd submission and upload details with sqvd.create.Study ###
  with sqvd:
   for basename in hold_base_name:
     new_study = {
               'study_name': basename,
               'sample_id': basename,
-              'panel_id': 'MYELOID',
-              'panel_version': 1,
+              'panel_id': panel,
+              'panel_version': panel_V,
               'subpanels': ['FULL'],
    	      'workflow': 'dna_somatic',
               'group': 'precmed'

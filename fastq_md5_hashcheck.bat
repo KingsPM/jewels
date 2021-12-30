@@ -34,7 +34,3 @@ echo.
 echo !count! files found and written to !output_file! file
 echo.
 EXIT /B 0
-
-
-
-

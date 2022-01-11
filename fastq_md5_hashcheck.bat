@@ -20,6 +20,10 @@ EXIT /B %ERRORLEVEL%
 echo.
 del /q %~1\!output_file!
 
+echo # Hashfile created on %date%%time% from hostname %computername% >> %~1\!output_file!
+echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/branch/develop/fastq_md5_hashcheck.bat >> %~1\!output_file!
+echo # Author: "KCHBioinformatics <kch-tr.KCHBioinformatics@nhs.net>"  >> %~1\!output_file!
+
 set /a count = 0
 for /f "tokens=*" %%a in ('dir %~1\*.!file_type! /a:-d-l-h /b /s') do (
     set filepath=%%a

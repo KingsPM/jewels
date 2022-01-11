@@ -16,15 +16,18 @@ EXIT /B %ERRORLEVEL%
 
 
 :: Functions
-:CreateHashfile 
+:CreateHashfile
 echo.
+echo Removing existing fastq.md5 if found...
 del /q %~1\!output_file!
+echo.
 
 set total=0
-for %%A in (*.!file_type!) do set /a total+=1
-echo %total% fastq/s found in folder !source!
+for %%A in (%~1\*.!file_type!) do set /a total+=1
+echo %total% !file_type!/s found in folder !source!
+echo.
 
-echo # Hashfile created on %date%%time% from hostname %computername% >> %~1\!output_file!
+echo # Hashfile created on %date%%time% from hostname %computername% on !file_type! found in %~1 >> %~1\!output_file!
 echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/branch/develop/fastq_md5_hashcheck.bat >> %~1\!output_file!
 echo # Author: "KCHBioinformatics <kch-tr.KCHBioinformatics@nhs.net>"  >> %~1\!output_file!
 

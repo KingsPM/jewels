@@ -20,6 +20,10 @@ EXIT /B %ERRORLEVEL%
 echo.
 del /q %~1\!output_file!
 
+set total=0
+for %%A in (*.!file_type!) do set /a total+=1
+echo %total% fastq/s found in folder !source!
+
 echo # Hashfile created on %date%%time% from hostname %computername% >> %~1\!output_file!
 echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/branch/develop/fastq_md5_hashcheck.bat >> %~1\!output_file!
 echo # Author: "KCHBioinformatics <kch-tr.KCHBioinformatics@nhs.net>"  >> %~1\!output_file!
@@ -30,11 +34,11 @@ for /f "tokens=*" %%a in ('dir %~1\*.!file_type! /a:-d-l-h /b /s') do (
 	for /r %%a in (!filepath!) do @set filename=%%~nxa
     for /f "eol=C tokens=* skip=1" %%b in ('certutil -hashfile "!filepath!" !hashtype!') do (
         set /a count += 1
-        echo %%b !filename!
+        echo %%b !filename! ^(!count!/%total%^)
         echo %%b !filename! >> %~1\!output_file!
     )
 )
 echo.
-echo !count! files found and written to !output_file! file
+echo !count! written to !output_file! file
 echo.
 EXIT /B 0

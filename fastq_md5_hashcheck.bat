@@ -2,11 +2,20 @@
 
 REM Generates a hashfile for all files of a specified file extention saves to the same directory.
 REM Written by Phil Davidson to enable hashchecking on fastq files by running on sequencer
- 
+
 set hashtype=md5
 set file_type=fastq.gz
 set output_file=fastq.md5
-set /p source="Directory Path: "
+
+echo.
+echo This script performs a hashcheck of %file_type% files and writes them to a file called %output_file%.
+echo This %output_file% should then be copied to Snappy along with the %file_type% files.
+echo.
+echo Please provide the full fastq folder path i.e.
+echo     On sequencers with Win10: d:\output\xxx_xxx_xxx\Alignment_1\xxx_xxx\Fastq
+echo     On sequencers with Win7:  d:\Illumina\MiSeqOutput\xxx_xxx_xxx_xxx-xxx\Data\Intensities\BaseCalls
+echo.
+set /p source="Please enter fastq folder path: "
 
 setlocal ENABLEDELAYEDEXPANSION
 
@@ -28,7 +37,7 @@ echo %total% !file_type!/s found in folder !source!
 echo.
 
 echo # Hashfile created on %date%%time% from hostname %computername% on !file_type! found in %~1 >> %~1\!output_file!
-echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/branch/develop/fastq_md5_hashcheck.bat >> %~1\!output_file!
+echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/branch/develop/fastq_hashcheck.bat >> %~1\!output_file!
 echo # Author: "KCHBioinformatics <kch-tr.KCHBioinformatics@nhs.net>"  >> %~1\!output_file!
 
 set /a count = 0

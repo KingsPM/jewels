@@ -37,7 +37,7 @@ echo %total% !file_type!/s found in folder !source!
 echo.
 
 echo # Hashfile created on %date%%time% from hostname %computername% on !file_type! found in %~1 >> %~1\!output_file!
-echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/branch/develop/fastq_hashcheck.bat >> %~1\!output_file!
+echo # Batchfile source code: https://git.kingspm.uk/KingsPM/jewels/src/fastq_hashcheck.bat >> %~1\!output_file!
 echo # Author: "KCHBioinformatics <kch-tr.KCHBioinformatics@nhs.net>"  >> %~1\!output_file!
 
 set /a count = 0
